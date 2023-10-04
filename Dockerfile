@@ -19,17 +19,17 @@ ENV PYTHONUNBUFFERED=1
 # Ensure we have an up to date baseline, install dependencies and
 # create a user so we don't run the app as root
 RUN set -ex; \
-    #for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
-    sudo apt-get update && \
-    sudp apt-get upgrade -y && \
-    sudo apt-get install -y --no-install-recommends $DEBIAN_PACKAGES && \
-    sudo apt-get clean && \
-    sudo rm -rf /var/lib/apt/lists/* && \
-    sudo pip install --no-cache-dir --upgrade pip && \
-    sudo pip install pipenv && \
-    sudo useradd -ms /bin/bash app -d /home/app -u 1000 -p "$(openssl passwd -1 Passw0rd)" && \
-    sudo mkdir -p /app && \
-    sudo chown app:app /app
+    for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
+    apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends $DEBIAN_PACKAGES && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install --no-cache-dir --upgrade pip && \
+    pip install pipenv && \
+    useradd -ms /bin/bash app -d /home/app -u 1000 -p "$(openssl passwd -1 Passw0rd)" && \
+    mkdir -p /app && \
+    chown app:app /app
 
 
 # Switch to the new user
